@@ -1,0 +1,51 @@
+Name:           python-daemon
+Version:        @VERSION@
+Release:        @REL@%{?dist}
+Summary:        Library to implement a well-behaved Unix daemon process
+
+# Some build scripts and test franework are licensed GPLv3+ but htose aren't shipped
+License:        ASL2.0
+URL:            http://pypi.python.org/pypi/python-daemon/
+Source0:        https://files.pythonhosted.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
+
+BuildArch:      noarch
+BuildRequires:  python%{python3_pkgversion}-devel,
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-docutils
+BuildRequires:  python%{python3_pkgversion}-lockfile
+
+%global _description\
+This library implements the well-behaved daemon specification of PEP 3143,\
+"Standard daemon process library".\
+\
+This is the python2 version of the library.
+
+%description %_description
+
+%package -n python%{python3_pkgversion}-daemon
+Summary:        Library to implement a well-behaved Unix daemon process
+Requires:       python%{python3_pkgversion}-lockfile
+Requires:       python%{python3_pkgversion}-docutils
+%{?python_provide:%python_provide python%{python3_pkgversion}-daemon}
+
+%description -n python%{python3_pkgversion}-daemon %_description
+
+This is the python3 version of the library.
+
+%prep
+%autosetup -p1
+
+%build
+%py3_build
+
+%install
+%py3_install
+rm -fr %{buildroot}%{python3_sitelib}/tests
+
+%files -n python%{python3_pkgversion}-daemon
+%license LICENSE.ASF-2
+%{python3_sitelib}/daemon/
+%{python3_sitelib}/python_daemon-%{version}-py%{python3_version}.egg-info/
+
+%changelog
+@CHANGELOG@
