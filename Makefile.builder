@@ -1,5 +1,5 @@
 ifeq ($(PACKAGE_SET),vm)
-	ifeq ($(DIST),centos7)
+	ifeq ($(DISTRIBUTION),centos)
 		RPM_SPEC_FILES := python-daemon.spec
 	endif
 endif
